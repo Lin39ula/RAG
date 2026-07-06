@@ -1,4 +1,5 @@
 import streamlit as st
+from backend.rag import ask
 
 st.set_page_config(page_title="智能问答助手", page_icon="🤖")
 st.title("🤖 我的第一个智能问答网页")
@@ -24,8 +25,11 @@ if prompt := st.chat_input("请问你想问什么？"):
         st.markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    # 模拟自动回复（以后会接入真正的大模型）
-    response = f'你刚才问的是："{prompt}"。等我接入了大模型，就能真正回答你了！'
+    with st.spinner("AI 正在检索知识库并思考中..."):
+        try:
+            response = ask(prompt)
+        except Exception as e:
+            response = f"【系统错误】后端调用失败，原因: {str(e)}"
 
     # 显示助手的回复
     with st.chat_message("assistant"):
