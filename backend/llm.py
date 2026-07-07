@@ -31,7 +31,8 @@ def get_llm_response(prompt: str) -> str:
 
 # === 以下是测试代码 ===
 # 只要在这个文件里直接右键运行，就能看到大模型有没有回答你
-if __name__ == "__main__":
+
+#if __name__ == "__main__":
     print("正在连接智谱大模型...")
     test_reply = get_llm_response("你好，请问什么是冒泡排序？用一句话回答。")
     print("\n--- 大模型回复如下 ---")
